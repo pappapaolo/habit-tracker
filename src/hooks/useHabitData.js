@@ -10,7 +10,7 @@ const HABITS = [
   { id: 'h7', name: 'Journaling', color: 'var(--color-violet)' },
 ];
 
-const WEEKS = 12;
+const WEEKS = 3;
 const DAYS_PER_WEEK = 7;
 const TOTAL_DAYS = WEEKS * DAYS_PER_WEEK;
 

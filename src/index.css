@@ -15,14 +15,17 @@
   /* Rainbow Palette */
   --color-red: #ff595e;
   --color-orange: #ffca3a;
-  --color-yellow: #f4d35e; /* Slightly darker for contrast */
+  --color-yellow: #f4d35e;
+  /* Slightly darker for contrast */
   --color-green: #8ac926;
   --color-blue: #1982c4;
   --color-indigo: #4267ac;
   --color-violet: #6a4c93;
 
-  --dot-size: 14px;
-  --dot-gap: 4px;
+  --dot-size: 16px;
+  /* Slightly larger dots */
+  --dot-gap: 8px;
+  /* High spacing */
 }
 
 body {
@@ -44,7 +47,8 @@ body {
 header h1 {
   font-size: 2.5em;
   line-height: 1.1;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  /* More breathing room */
   background: linear-gradient(90deg, var(--color-red), var(--color-orange), var(--color-yellow), var(--color-green), var(--color-blue), var(--color-indigo), var(--color-violet));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -53,24 +57,27 @@ header h1 {
 .habit-row {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  /* More vertical space */
   justify-content: center;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
-  gap: 1rem;
+  flex-wrap: wrap;
+  /* Allow wrapping on small screens */
+  gap: 1.5rem;
 }
 
 .habit-name {
-  width: 150px;
+  width: 160px;
   text-align: right;
   font-weight: bold;
-  font-size: 1rem;
-  padding-right: 1rem;
+  font-size: 1.1rem;
+  padding-right: 1.5rem;
   flex-shrink: 0;
 }
 
 .habit-grid {
   display: grid;
-  grid-template-columns: repeat(84, auto); /* 12 weeks * 7 days. Might be too wide */
+  grid-template-columns: repeat(84, auto);
+  /* 12 weeks * 7 days. Might be too wide */
   /* Let's try to group them visually by weeks? */
   /* Actually, 84 columns is a lot for a single row. Let's start with simple flex or grid  */
   /* If we want 12 weeks, maybe we can add a small gap every 7 dots */
@@ -83,7 +90,8 @@ header h1 {
   height: var(--dot-size);
   border-radius: 50%;
   border: none;
-  background-color: #4a4a4a; /* Greyed out initially */
+  background-color: #4a4a4a;
+  /* Greyed out initially */
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
   padding: 0;
@@ -104,8 +112,9 @@ header h1 {
 }
 
 /* Grouping by weeks for better readability */
-.habit-grid > .dot:nth-child(7n) {
-  margin-right: 6px;
+.habit-grid>.dot:nth-child(7n) {
+  margin-right: 12px;
+  /* Increased week spacing */
 }
 
 @media (prefers-color-scheme: light) {
@@ -113,9 +122,11 @@ header h1 {
     color: #213547;
     background-color: #ffffff;
   }
+
   .dot {
     background-color: #e0e0e0;
   }
+
   .dot:hover {
     background-color: #d0d0d0;
   }
@@ -127,13 +138,16 @@ header h1 {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .habit-name {
     text-align: left;
     margin-bottom: 0.5rem;
   }
+
   .habit-grid {
     flex-wrap: wrap;
     justify-content: flex-start;
   }
+
   /* On mobile allow wrapping */
 }
