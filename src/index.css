@@ -1,0 +1,139 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Rainbow Palette */
+  --color-red: #ff595e;
+  --color-orange: #ffca3a;
+  --color-yellow: #f4d35e; /* Slightly darker for contrast */
+  --color-green: #8ac926;
+  --color-blue: #1982c4;
+  --color-indigo: #4267ac;
+  --color-violet: #6a4c93;
+
+  --dot-size: 14px;
+  --dot-gap: 4px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, var(--color-red), var(--color-orange), var(--color-yellow), var(--color-green), var(--color-blue), var(--color-indigo), var(--color-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.habit-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 1rem;
+}
+
+.habit-name {
+  width: 150px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 1rem;
+  padding-right: 1rem;
+  flex-shrink: 0;
+}
+
+.habit-grid {
+  display: grid;
+  grid-template-columns: repeat(84, auto); /* 12 weeks * 7 days. Might be too wide */
+  /* Let's try to group them visually by weeks? */
+  /* Actually, 84 columns is a lot for a single row. Let's start with simple flex or grid  */
+  /* If we want 12 weeks, maybe we can add a small gap every 7 dots */
+  display: flex;
+  gap: var(--dot-gap);
+}
+
+.dot {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  border: none;
+  background-color: #4a4a4a; /* Greyed out initially */
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+  padding: 0;
+}
+
+.dot:hover {
+  transform: scale(1.2);
+  background-color: #6a6a6a;
+}
+
+.dot.filled {
+  background-color: var(--dot-color);
+  box-shadow: 0 0 8px var(--dot-color);
+}
+
+.dot:active {
+  transform: scale(0.9);
+}
+
+/* Grouping by weeks for better readability */
+.habit-grid > .dot:nth-child(7n) {
+  margin-right: 6px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  .dot {
+    background-color: #e0e0e0;
+  }
+  .dot:hover {
+    background-color: #d0d0d0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .habit-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .habit-name {
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+  .habit-grid {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  /* On mobile allow wrapping */
+}
