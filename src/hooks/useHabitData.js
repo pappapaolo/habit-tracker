@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 
 const HABITS = [
-  { id: 'h1', name: '3 pages', color: 'var(--color-red)' },
-  { id: 'h2', name: 'Posture', color: 'var(--color-orange)' },
-  { id: 'h3', name: 'Tiktok', color: 'var(--color-yellow)' },
-  { id: 'h4', name: 'Typing', color: 'var(--color-green)' },
-  { id: 'h5', name: 'Coding', color: 'var(--color-blue)' },
-  { id: 'h6', name: 'Reading', color: 'var(--color-indigo)' },
-  { id: 'h7', name: 'Journal', color: 'var(--color-violet)' },
+  { id: 'h1', name: '3 pages', color: 'var(--color-red)', animation: 'explode' },
+  { id: 'h2', name: 'Posture', color: 'var(--color-orange)', animation: 'pop' },
+  { id: 'h3', name: 'Tiktok', color: 'var(--color-yellow)', animation: 'bounce' },
+  { id: 'h4', name: 'Typing', color: 'var(--color-green)', animation: 'shake' },
+  { id: 'h5', name: 'Coding', color: 'var(--color-blue)', animation: 'pulse' },
+  { id: 'h6', name: 'Reading', color: 'var(--color-indigo)', animation: 'fade' },
+  { id: 'h7', name: 'Journal', color: 'var(--color-violet)', animation: 'rotate' },
 ];
 
-const WEEKS = 3;
+const WEEKS = 12;
 const DAYS_PER_WEEK = 7;
 const TOTAL_DAYS = WEEKS * DAYS_PER_WEEK;
 
