@@ -5,8 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.6);
-  background-color: #1a1a1a;
-  /* Darker background */
+  background-color: #111;
+  /* Even darker */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,9 +21,10 @@
   --color-indigo: #4267ac;
   --color-violet: #6a4c93;
 
-  --dot-size: 20px;
-  /* Slightly smaller to fit 3 rows */
-  --dot-gap: 6px;
+  --dot-size: 26px;
+  /* Chunky dots */
+  --dot-gap: 4px;
+  /* Tight gap */
 }
 
 body {
@@ -31,79 +32,57 @@ body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  /* Allow scrolling */
   overflow-y: auto;
-  padding: 2rem 0;
+  padding: 2rem;
 }
 
 .app-container {
   width: 100%;
-  max-width: 1000px;
-  /* Constrain width */
-  padding: 1rem;
+  max-width: 1400px;
+  /* Wider to fill screen */
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 header h1 {
-  font-size: 1.5em;
-  font-weight: 600;
-  color: #555;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #444;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   margin: 0;
 }
 
-/* Habit Container */
-.habit-container {
+.rainbow-grid {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.habit-header {
-  width: 100%;
-  text-align: left;
-  border-bottom: 1px solid #333;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.habit-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.habit-grid-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  /* Spacing between the 3 rows */
-}
-
-.habit-grid-row {
-  display: flex;
-  gap: var(--dot-gap);
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 16px;
+  /* Gap between Days */
 }
 
-/* Weeks grouping */
-.habit-grid-row>.dot:nth-child(7n) {
-  margin-right: 12px;
+.day-group {
+  display: flex;
+  flex-direction: row;
+  /* Horizontal Rainbow */
+  gap: var(--dot-gap);
+  padding: 4px;
+  border-radius: 12px;
+  background-color: #1a1a1a;
+  transition: transform 0.2s ease;
 }
 
-.habit-grid-row>.dot:last-child {
-  margin-right: 0;
+.day-group:hover {
+  background-color: #222;
+  transform: translateY(-2px);
 }
 
 .dot {
   width: var(--dot-size);
   height: var(--dot-size);
-  border-radius: 6px;
+  border-radius: 8px;
   /* Squircle */
   border: none;
   background-color: #2a2a2a;
@@ -111,18 +90,42 @@ header h1 {
   transition: background-color 0.2s ease, transform 0.2s ease;
   padding: 0;
   position: relative;
+  will-change: transform;
+  /* Opt for animation */
 }
 
 .dot.filled {
   background-color: var(--dot-color);
-  /* Removed glow/shadow */
+  /* box-shadow removed as requested */
 }
 
-/* Animations */
+/* Specific Habit Animations (Triggered via class) */
+.anim-explode {
+  animation: explode-scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-/* Pop */
 .anim-pop {
   animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.anim-bounce {
+  animation: bounce 0.5s ease;
+}
+
+.anim-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.anim-pulse {
+  animation: pulse 0.5s ease-out;
+}
+
+.anim-fade {
+  animation: fade 0.6s ease;
+}
+
+.anim-rotate {
+  animation: rotate 0.5s ease-out;
 }
 
 @keyframes pop {
@@ -131,17 +134,12 @@ header h1 {
   }
 
   50% {
-    transform: scale(1.6);
+    transform: scale(1.5);
   }
 
   100% {
     transform: scale(1);
   }
-}
-
-/* Bounce */
-.anim-bounce {
-  animation: bounce 0.5s ease;
 }
 
 @keyframes bounce {
@@ -152,17 +150,8 @@ header h1 {
   }
 
   50% {
-    transform: translateY(-15px);
+    transform: translateY(-10px);
   }
-
-  75% {
-    transform: translateY(5px);
-  }
-}
-
-/* Shake */
-.anim-shake {
-  animation: shake 0.4s ease-in-out;
 }
 
 @keyframes shake {
@@ -173,71 +162,49 @@ header h1 {
   }
 
   25% {
-    transform: translateX(-5px) rotate(-10deg);
+    transform: translateX(-4px) rotate(-5deg);
   }
 
   75% {
-    transform: translateX(5px) rotate(10deg);
+    transform: translateX(4px) rotate(5deg);
   }
-}
-
-/* Pulse */
-.anim-pulse {
-  animation: pulse 0.6s ease-out;
 }
 
 @keyframes pulse {
   0% {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 
   50% {
-    transform: scale(0.8);
-    opacity: 0.8;
+    opacity: 0.6;
+    transform: scale(0.9);
   }
 
   100% {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
-}
-
-/* Fade */
-.anim-fade {
-  animation: fade 0.6s ease;
 }
 
 @keyframes fade {
   0% {
     opacity: 0;
-    transform: scale(0.5);
   }
 
   100% {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 1);
   }
-}
-
-/* Rotate */
-.anim-rotate {
-  animation: rotate 0.5s ease-out;
 }
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg) scale(0.5);
+    transform: rotate(0deg);
   }
 
   100% {
-    transform: rotate(360deg) scale(1);
+    transform: rotate(360deg);
   }
-}
-
-/* Explode (CSS helper for confetti) */
-.anim-explode {
-  animation: explode-scale 0.2s ease-out;
 }
 
 @keyframes explode-scale {
@@ -246,7 +213,7 @@ header h1 {
   }
 
   50% {
-    transform: scale(0.8);
+    transform: scale(1.3);
   }
 
   100% {
@@ -257,14 +224,18 @@ header h1 {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #f5f5f5;
+    background-color: #f0f0f0;
   }
 
-  .dot {
+  .day-group {
     background-color: #e0e0e0;
   }
 
-  .habit-header {
-    border-bottom: 1px solid #ddd;
+  .day-group:hover {
+    background-color: #d0d0d0;
+  }
+
+  .dot {
+    background-color: #ccc;
   }
 }
