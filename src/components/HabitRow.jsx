@@ -4,7 +4,7 @@ import Dot from './Dot';
 const HabitRow = ({ habit, data, onToggle }) => {
     return (
         <div className="habit-row">
-            <div className="habit-name" style={{ color: habit.color }}>
+            <div className="habit-name">
                 {habit.name}
             </div>
             <div className="habit-grid">

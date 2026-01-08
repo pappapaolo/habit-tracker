@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 const HABITS = [
-  { id: 'h1', name: '3 pages per day', color: 'var(--color-red)' },
-  { id: 'h2', name: 'Posture workout', color: 'var(--color-orange)' },
-  { id: 'h3', name: 'Posting tiktoks', color: 'var(--color-yellow)' },
-  { id: 'h4', name: 'Typing practice', color: 'var(--color-green)' },
-  { id: 'h5', name: 'Coding mini project', color: 'var(--color-blue)' },
+  { id: 'h1', name: '3 pages', color: 'var(--color-red)' },
+  { id: 'h2', name: 'Posture', color: 'var(--color-orange)' },
+  { id: 'h3', name: 'Tiktok', color: 'var(--color-yellow)' },
+  { id: 'h4', name: 'Typing', color: 'var(--color-green)' },
+  { id: 'h5', name: 'Coding', color: 'var(--color-blue)' },
   { id: 'h6', name: 'Reading', color: 'var(--color-indigo)' },
-  { id: 'h7', name: 'Journaling', color: 'var(--color-violet)' },
+  { id: 'h7', name: 'Journal', color: 'var(--color-violet)' },
 ];
 
 const WEEKS = 3;
@@ -18,7 +18,11 @@ export const useHabitData = () => {
   const [habitData, setHabitData] = useState(() => {
     const saved = localStorage.getItem('habit-tracker-data');
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      // Validate length. If config changed (e.g. weeks changed), reset or adjust.
+      // For simplicity, if any habit's data length differs from TOTAL_DAYS, reset.
+      const isValid = Object.values(parsed).every(d => d.length === TOTAL_DAYS);
+      if (isValid) return parsed;
     }
     // Initialize empty data
     const initialData = {};

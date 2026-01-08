@@ -1,10 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Clash Display', sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 0.6);
+  /* More neutral/grey text */
   background-color: #242424;
 
   font-synthesis: none;
@@ -12,20 +13,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Rainbow Palette */
+  /* Rainbow Palette - Tweaked for contrast */
   --color-red: #ff595e;
-  --color-orange: #ffca3a;
-  --color-yellow: #f4d35e;
-  /* Slightly darker for contrast */
+  --color-orange: #ff924c;
+  /* More orange/burnt to distinguish from yellow */
+  --color-yellow: #ffea00;
+  /* Bright pure yellow */
   --color-green: #8ac926;
   --color-blue: #1982c4;
   --color-indigo: #4267ac;
   --color-violet: #6a4c93;
 
-  --dot-size: 16px;
-  /* Slightly larger dots */
-  --dot-gap: 8px;
-  /* High spacing */
+  --dot-size: 24px;
+  /* Larger dots */
+  --dot-gap: 6px;
+  /* Tighter spacing */
 }
 
 body {
@@ -45,42 +47,42 @@ body {
 }
 
 header h1 {
-  font-size: 2.5em;
+  font-size: 1.5em;
+  /* Smaller */
+  font-weight: 600;
   line-height: 1.1;
-  margin-bottom: 3rem;
-  /* More breathing room */
-  background: linear-gradient(90deg, var(--color-red), var(--color-orange), var(--color-yellow), var(--color-green), var(--color-blue), var(--color-indigo), var(--color-violet));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+  color: #666;
+  /* Neutral grey */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
 .habit-row {
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
-  /* More vertical space */
+  margin-bottom: 0.8rem;
+  /* Closer together */
   justify-content: center;
   flex-wrap: wrap;
-  /* Allow wrapping on small screens */
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .habit-name {
-  width: 160px;
+  width: 100px;
+  /* Shorter width since names are shorter */
   text-align: right;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding-right: 1.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding-right: 1rem;
   flex-shrink: 0;
+  color: #888;
+  /* Neutral grey for names */
 }
 
 .habit-grid {
-  display: grid;
-  grid-template-columns: repeat(84, auto);
-  /* 12 weeks * 7 days. Might be too wide */
-  /* Let's try to group them visually by weeks? */
-  /* Actually, 84 columns is a lot for a single row. Let's start with simple flex or grid  */
-  /* If we want 12 weeks, maybe we can add a small gap every 7 dots */
   display: flex;
   gap: var(--dot-gap);
 }
@@ -88,33 +90,34 @@ header h1 {
 .dot {
   width: var(--dot-size);
   height: var(--dot-size);
-  border-radius: 50%;
+  border-radius: 6px;
+  /* Squircle-ish (approx 25-30% of size) */
   border: none;
-  background-color: #4a4a4a;
-  /* Greyed out initially */
+  background-color: #333;
+  /* Darker grey initially */
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease;
   padding: 0;
 }
 
 .dot:hover {
-  transform: scale(1.2);
-  background-color: #6a6a6a;
+  transform: scale(1.1);
+  background-color: #444;
 }
 
 .dot.filled {
   background-color: var(--dot-color);
-  box-shadow: 0 0 8px var(--dot-color);
+  box-shadow: 0 0 10px var(--dot-color);
 }
 
 .dot:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
 /* Grouping by weeks for better readability */
 .habit-grid>.dot:nth-child(7n) {
-  margin-right: 12px;
-  /* Increased week spacing */
+  margin-right: 16px;
+  /* Distinct week gap */
 }
 
 @media (prefers-color-scheme: light) {
@@ -129,6 +132,10 @@ header h1 {
 
   .dot:hover {
     background-color: #d0d0d0;
+  }
+
+  header h1 {
+    color: #333;
   }
 }
 
